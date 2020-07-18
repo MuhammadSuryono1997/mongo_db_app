@@ -40,6 +40,20 @@ class DatabaseClass
     {
         return $this->client->db_company->$table->deleteOne($id);
     }
+
+    public function join_table($table_from, $table_ref, $local_field, $fk_field, $as)
+    {
+        $join = $this->client->db_company;
+        $select = (object)[
+            '$lookup'=> [
+                'from'=> $table_ref,
+                'localField'=> $local_field, 
+                'foreignField'=> $fk_field, 
+                'as'=> $as]
+        ];
+        $data = $join->$table_from->aggregate([$select]);
+        return $data;
+    }
     
 
 

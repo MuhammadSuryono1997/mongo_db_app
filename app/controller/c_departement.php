@@ -37,6 +37,9 @@ class C_Departement
     public function get_where($id)
     {
         $get = $this->db->select_where('departement', $id);
-        return $get;
+        if($get)
+        {
+            return 'berhasil';
+        }
     }
 }
