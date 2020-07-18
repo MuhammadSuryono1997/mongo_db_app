@@ -19,6 +19,31 @@ if (isset($_POST['kode_departemen']))
     ];
     $dept->insert($data);
 }
+
+
+// AKSI EMPLOYEES
+
+if(isset($_REQUEST['delete_employe']))
+{
+    $data = (object)['emp_no'=>$_REQUEST['id']];
+    $hapus = $emp->delete($data);
+    if($hapus)
+    {
+        header('location:http://localhost:90/index.php/dashboard');
+    }
+}
+
+if (isset($_POST['first_name'])) 
+{
+    $data = (object)[
+        'emp_no'=> hash('md5','emp-'.time()),
+        'first_name'=>$_POST['first_name'],
+        'last_name'=>$_POST['last_name'],
+        'dept_no'=>$_POST['departement_code']
+    ];
+    $emp->insert($data);
+    
+}
 ?>
 
 <div class="col-lg-6">

@@ -23,6 +23,24 @@ class C_Employess
         $as = 'departement';
         return $this->db->join_table($table_from, $table_ref, $local_field, $fk_field, $as);
     }
+    
+    public function insert($data)
+    {
+        $insert = $this->db->insert('employees', $data);
+        if($insert)
+        {
+            return 'berhasil';
+        }
+    }
+
+    public function delete($id)
+    {
+        $hapus = $this->db->delete('employees',$id);
+        if ($hapus) 
+        {
+            return 'berhasil';
+        }
+    }
 }
 
 
