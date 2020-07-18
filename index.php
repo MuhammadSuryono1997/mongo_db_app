@@ -4,10 +4,11 @@ use App\Controllers\C_Departement;
 use App\Controllers\C_Employess;
 
 /*
-*
+* SISTEM INI RUNNING DENGAN MENGGUNAKAN BROWSER
 * UNTUK RUNNING DI BROWSER GUNAKAN PORT 90 
 * http://localhost:90/
 *
+* TERIMAKASIH
 */
 
 $dept = new C_Departement();
