@@ -33,12 +33,30 @@ class C_Employess
         }
     }
 
+    public function update($id, $data)
+    {
+        $update = $this->db->update('employees', $id, $data);
+        if($update)
+        {
+            return 'berhasil';
+        }
+    }
+
     public function delete($id)
     {
         $hapus = $this->db->delete('employees',$id);
         if ($hapus) 
         {
             return 'berhasil';
+        }
+    }
+
+    public function get_where($id)
+    {
+        $get = $this->db->select_where('employees', $id);
+        if($get)
+        {
+            return $get;
         }
     }
 }

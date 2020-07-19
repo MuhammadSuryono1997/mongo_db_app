@@ -14,6 +14,9 @@ use App\Controllers\C_Employess;
 $dept = new C_Departement();
 $emp = new C_Employess();
 $uri = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+
+
+
 if($uri[1] =="")
 {
     header('location:http://localhost:90/index.php/dashboard');
@@ -26,9 +29,9 @@ if($uri[1] =="")
 
 if (isset($uri[2])) 
 {
-    $view = 'dashboard';
-    $data_dept = $dept->get();
-    $data_emp = $emp->join();
+        $view = 'dashboard';
+        $data_dept = $dept->get();
+        $data_emp = $emp->join();
 }
 require __DIR__.'/app/view/'.$main;
 

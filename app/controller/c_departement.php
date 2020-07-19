@@ -34,12 +34,21 @@ class C_Departement
         }
     }
 
+    public function update($id, $data)
+    {
+        $update = $this->db->update('departement', $id, $data);
+        if($update)
+        {
+            return 'berhasil';
+        }
+    }
+
     public function get_where($id)
     {
         $get = $this->db->select_where('departement', $id);
         if($get)
         {
-            return 'berhasil';
+            return $get;
         }
     }
 }
