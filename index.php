@@ -30,8 +30,6 @@ if($uri[1] =="")
 if (isset($uri[2])) 
 {
         $view = 'dashboard';
-        $data_dept = $dept->get();
-        $data_emp = $emp->join();
 }
 require __DIR__.'/app/view/'.$main;
 

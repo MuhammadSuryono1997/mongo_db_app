@@ -64,6 +64,33 @@ if (isset($_POST['first_name']))
     $emp->insert($data);
     
 }
+
+// echo "tes";
+if (isset($_REQUEST['edit_employe'])) 
+{
+    $data = (object)[
+        'first_name' => $_POST['first_name_edit'],
+        'last_name' => $_POST['last_name_edit']
+    ];
+
+    $id = (object)[
+      'emp_no' => $_REQUEST['id']
+    ];
+
+    $update = $emp->update($id, $data) ;
+    // echo $update;
+    // echo ;
+    // var_dump($id);
+    if ($update == 'berhasil') {
+      header('location:http://localhost:90/index.php/dashboard');
+    }else{
+      echo $emp->update($id, $data);
+    }
+}
+
+
+$data_dept = $dept->get();
+$data_emp = $emp->join();
 ?>
 
 <div class="col-lg-6">
@@ -243,19 +270,19 @@ if (isset($_POST['first_name']))
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    <form action="http://localhost:90/index.php/dashboard" method="POST">
+    <form action="" class="form-edit-employe" method="POST">
       <div class="modal-body">
         <div class="form-group">
             <label>First Name</label>
-            <input type="text" name='first_edit' class="form-control" placeholder="Enter Departement Code"/>
+            <input type="text" name='first_name_edit' class="form-control first_edit" placeholder="Enter Departement Code"/>
         </div>
         <div class="form-group">
             <label>Last Name Name</label>
-            <input type="text" name='last_edit' class="form-control" placeholder="Enter Departement Name"/>
+            <input type="text" name='last_name_edit' class="form-control last_edit" placeholder="Enter Departement Name"/>
         </div>
         <div class="form-group">
             <label>Departement</label>
-            <select class="form-control" name='departement_code_edit'>
+            <select class="form-control select_dept_edit" name='departement_code_edit'>
                 <option value="">Select Departement</option>
                 <?php
                 $dept_data = $dept->get();
@@ -303,6 +330,7 @@ if (isset($_POST['first_name']))
     $(document).on('click', '.btn-edit-employe', function()
     {
       var id= $(this).attr('data');
+      $('.form-edit-employe').attr('action', 'http://localhost:90/index.php/dashboard?edit_employe&id='+id);
       $.ajax({
           type: 'POST',
           url: 'http://localhost:90/coba.php?data-edit-employee',
