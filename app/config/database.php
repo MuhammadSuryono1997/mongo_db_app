@@ -1,7 +1,7 @@
 <?php
 namespace App\Database;
 use MongoDB\Client;
-// require __DIR__.'/../../vendor/autoload.php';
+//require __DIR__.'/../../vendor/autoload.php';
 
 class DatabaseClass
 {
@@ -59,10 +59,10 @@ class DatabaseClass
 
 }
 
-// $db = new DatabaseClass();
+//$db = new DatabaseClass();
 // $db->delete('departement', (object)['dept_no'=> 'd002']);
-// $data = $db->select('departement');
-// foreach($data as $d)
-// {
+ //$data = $db->select('departement');
+ //foreach($data as $d)
+ //{
 //     var_dump($d);
 // }

@@ -31,8 +31,6 @@ if (isset($_REQUEST['edit_dept']))
     ];
 
     $update = $dept->update($id, $data) ;
-    // echo ;
-    // var_dump($id);
     if ($update == 'berhasil') {
       header('location:http://localhost:90/index.php/dashboard');
     }else{
@@ -70,17 +68,17 @@ if (isset($_REQUEST['edit_employe']))
 {
     $data = (object)[
         'first_name' => $_POST['first_name_edit'],
-        'last_name' => $_POST['last_name_edit']
+        'last_name' => $_POST['last_name_edit'],
+        'dept_no' => $_POST['departement_code_edit']
     ];
 
     $id = (object)[
-      'emp_no' => $_REQUEST['id']
+      'emp_no' => $_POST['id_emp']
     ];
 
+    var_dump($data);
+
     $update = $emp->update($id, $data) ;
-    // echo $update;
-    // echo ;
-    // var_dump($id);
     if ($update == 'berhasil') {
       header('location:http://localhost:90/index.php/dashboard');
     }else{
@@ -91,6 +89,8 @@ if (isset($_REQUEST['edit_employe']))
 
 $data_dept = $dept->get();
 $data_emp = $emp->join();
+
+// print_r($data_emp);
 ?>
 
 <div class="col-lg-6">
@@ -115,7 +115,7 @@ $data_emp = $emp->join();
             <tr>
                 <td><?=$no++?></td>
                 <td><?=$employ->first_name." ".$employ->last_name?></td>
-                <td><?=$employ->departement[$i]->dept_name?></td>
+                <td><?=$employ->departement[0]->dept_name?></td>
                 <td>
                    <button class="btn btn-sm btn-primary btn-edit-employe" data="<?=$employ->emp_no?>">Edit</button>
                    <a href="http://localhost:90/index.php/dashboard?delete_employe&id=<?=$employ->emp_no?>" class="btn btn-danger btn-sm">Delete</button>
@@ -203,11 +203,11 @@ $data_emp = $emp->join();
       <div class="modal-body">
         <div class="form-group">
             <label>First Name</label>
-            <input type="text" name='first_name' class="form-control" placeholder="Enter Departement Code"/>
+            <input type="text" name='first_name' class="form-control" placeholder="Enter First Name"/>
         </div>
         <div class="form-group">
             <label>Last Name Name</label>
-            <input type="text" name='last_name' class="form-control" placeholder="Enter Departement Name"/>
+            <input type="text" name='last_name' class="form-control" placeholder="Enter Last Name"/>
         </div>
         <div class="form-group">
             <label>Departement</label>
@@ -272,6 +272,7 @@ $data_emp = $emp->join();
       </div>
     <form action="" class="form-edit-employe" method="POST">
       <div class="modal-body">
+        <input type="hidden" name="id_emp" class='id_emp'/>
         <div class="form-group">
             <label>First Name</label>
             <input type="text" name='first_name_edit' class="form-control first_edit" placeholder="Enter Departement Code"/>
@@ -330,7 +331,7 @@ $data_emp = $emp->join();
     $(document).on('click', '.btn-edit-employe', function()
     {
       var id= $(this).attr('data');
-      $('.form-edit-employe').attr('action', 'http://localhost:90/index.php/dashboard?edit_employe&id='+id);
+      $('.form-edit-employe').attr('action', 'http://localhost:90/index.php/dashboard?edit_employe&id');
       $.ajax({
           type: 'POST',
           url: 'http://localhost:90/coba.php?data-edit-employee',
@@ -343,6 +344,7 @@ $data_emp = $emp->join();
             var data = JSON.parse(res);
             $('.first_edit').attr('value', data.first_name);
             $('.last_edit').attr('value', data.last_name);
+            $('.id_emp').attr('value', data.emp_no);
             $('#employeeEditModal').modal('show');
           }
         })
